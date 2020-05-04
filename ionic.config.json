@@ -1,0 +1,8 @@
+{
+  "name": "Repartidores-Veloservi",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
