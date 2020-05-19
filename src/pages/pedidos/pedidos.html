@@ -1,0 +1,19 @@
+<ion-header no-border>
+    <ion-row>
+        <ion-col col-1>
+            <ion-buttons>
+                <button ion-button clear (click)="abrirmenu()">
+                    <ion-icon name="menu"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-col>
+        <ion-col col-11>
+            <p text-center>Listado de Pedidos</p>
+        </ion-col>
+    </ion-row>
+</ion-header>
+
+<ion-tabs>
+      <ion-tab [root]="tab1" tabTitle="Store App" [tabBadge]="pedidos.length" tabIcon="ios-create"></ion-tab>
+      <ion-tab [root]="tab2" tabTitle="Externo" [tabBadge]="pedidosEsp.length" tabIcon="home"></ion-tab>
+</ion-tabs>

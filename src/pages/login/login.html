@@ -1,0 +1,30 @@
+<ion-content>
+    <ion-grid class="mt-30">
+        <ion-row>
+            <ion-col col-12>
+                <img src="assets/imgs/logo_marca.png">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <hr>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12>
+                <h1 text-center class="text-white">BIENVENIDO</h1>
+                <p text-center class="text-white">Inicia sesión con tus datos de Acceso.</p>
+            </ion-col>
+            <ion-col width-10>
+                <ion-label>Correo Electronico</ion-label>
+                <ion-input type="text" placeholder="Ingresa la dirección registrada" [(ngModel)]="user.email"></ion-input>
+
+                <ion-label>Contraseña</ion-label>
+                <ion-input type="password" placeholder="Contraseña de acceso" [(ngModel)]="user.password"></ion-input>
+
+                <button ion-button round full (click)="login()" [disabled]="user.email.length <= 5 || user.password.length < 5">Ingresar</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+</ion-content>

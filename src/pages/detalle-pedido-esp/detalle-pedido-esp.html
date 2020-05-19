@@ -1,0 +1,56 @@
+
+<ion-content style="margin-top: 40px !important;">
+    <h5 text-center>Resumen del Pedido Especial</h5>
+    <ion-card>
+        <ion-card-header>
+            <h2 text-center>Datos del Pedido</h2>
+        </ion-card-header>
+        <ion-card-content>
+            <p>Pedido No.:<strong>{{ pedido.id }}</strong></p>
+            <p>Cliente: <strong>{{ pedido.name }}</strong></p>
+            <hr>
+            <span>Datos del Pedido</span>
+            <p>Comercio: <strong>{{ pedido.nombre_sucursal }}</strong></p>
+            <p>Dirección Comercio: <strong>{{ pedido.direccion_sucursal }}</strong></p>
+            <p>Pedido solicitado: <strong>{{ pedido.productos }}</strong></p>
+            <p>Importe del Pedido: <strong style="color:chocolate">{{ pedido.total }}</strong></p>
+        </ion-card-content>
+    </ion-card>
+
+    <hr>
+
+    <ion-card>
+        <ion-card-header>
+            <h2 text-center>Datos del envío</h2>
+        </ion-card-header>
+        <ion-card-content>
+            <p>Dirección de entrega:<br>
+                <strong>{{ pedido.dir_entrega }}</strong>
+            </p>
+            <p>Estatus del Pedido:</p>
+            <strong style="color:chocolate; font-size: 1.2em;">{{ pedido.estatus }}</strong>
+            <div *ngIf="pedido.estatus == 'Pendiente de aprobación'">
+                <span>Acciones sobre el Pedido:</span><br>
+                <button ion-button color="danger" (click)="cancelarPedido()">Cancelar</button>
+                <button ion-button color="primary" (click)="aceptarPedido()">Aceptar</button>
+            </div>
+            <div *ngIf="pedido.estatus != 'Pendiente de aprobación' && pedido.estatus != 'Entregado' && pedido.estatus != 'Pedido Cancelado'">
+                <ion-select
+                    placeholder="Actualiza el estado" [(ngModel)]="estatus" (ionChange)="actualizar_estado()">
+                    <ion-option value="Recolección de productos">Recolección de productos</ion-option>
+                    <ion-option value="En camino a Entrega">En camino a Entrega</ion-option>
+                    <ion-option value="Entregado">Entregado</ion-option>
+                </ion-select>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-title text-center>
+            <button ion-button navPush="PedidosPage">Regresar al listado de Pedidos</button>
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

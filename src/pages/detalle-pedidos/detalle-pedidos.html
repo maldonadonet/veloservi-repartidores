@@ -1,0 +1,95 @@
+<ion-header>
+    <ion-toolbar>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    
+    <ion-row>
+        <ion-col col-12>
+            <h3 text-center>Detalle del pedido</h3>
+        </ion-col>
+    </ion-row>
+
+	<ion-card mode="ios">
+		<ion-card-header>
+			<strong text-center>Datos del Pedido</strong>
+		</ion-card-header>
+		<ion-card-content>
+			<p><strong>Cliente:</strong> {{ items.nombre }}</p>
+			<p><strong>Teléfono:</strong> {{ items.telefono }}</p>
+			<hr>
+			<span>Dirección:</span>
+			<p><strong>Cuidad:</strong> {{ items.cuidad }}</p>
+			<p><strong>Colonia:</strong> {{ items.colonia }}</p>
+			<p><strong>Calle:</strong> {{ items.calle }}</p>
+			<p><strong>Referencias:</strong> {{ items.referencia }}</p>
+			<hr>
+			<p><strong>Fecha del pedido:</strong> {{ items.fecha_pedido }}</p>
+			<p><strong>Id del pedido:</strong> {{ items.id_pedido }}</p>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Estado del pedido</ion-card-title>
+		</ion-card-header>
+		<ion-card-content>
+			<p>Estatus: <strong text-center style="color:#c70039; font-weight: 600;">{{ items.estatus }}</strong></p>
+			<div *ngIf="items.estatus == 'pendiente de revision'">
+				<button ion-button color="primary" (click)="aceptar_pedido()">Aceptar</button>
+				<button ion-button color="danger" (click)="rechazar_pedido()">Rechazar</button>
+			</div>
+			<hr>
+			<ion-item>
+                    <ion-select *ngIf="items.estatus != 'pendiente de revision' && items.estatus != 'Entregado'" 
+                                placeholder="Actualiza el estado" 
+                                [(ngModel)]="estatus" 
+                                (ionChange)="actualizar_estado()">
+						<ion-option value="Recolección de productos">Recolección de productos</ion-option>
+						<ion-option value="En camino a Entrega">En camino a Entrega</ion-option>
+						<ion-option value="Entregado">Entregado</ion-option>
+					</ion-select>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card mode="ios">
+		<ion-card-header>
+			Detalle del Pedido
+		</ion-card-header>
+		<ion-card-content>
+			<ion-list>
+				<ion-list-header>
+					Detalle de los productos del Pedido
+				</ion-list-header>
+				<ion-item *ngFor="let item  of items.detalle">
+					<ion-row>
+						<ion-col col-6>
+							<p>Producto: <strong>{{ item.nombre }}</strong></p>
+							<p>Cantidad: <strong>{{ item.cantidad }}</strong></p>
+							<p>Precio: <strong>${{ item.costo }}</strong></p>
+						</ion-col>
+						<ion-col col-6>
+							<p>Total: $ {{ (item.costo * item.cantidad).toFixed(2) }}</p>
+						</ion-col>
+					</ion-row>
+					<br>                    
+				</ion-item>
+				<ion-row>
+					<ion-col col-12 text-right>
+						<p><strong id="total">Total del pedido: $ {{ (items.monto) }}</strong></p>
+					</ion-col>
+				</ion-row>
+			</ion-list>   
+		</ion-card-content>
+	</ion-card>
+   
+</ion-content>
+
+<ion-footer>
+	<ion-col col-12>
+        <button ion-button full navPush="PedidosPage">Regresar al listado de Pedidos</button>
+    </ion-col>
+</ion-footer>
